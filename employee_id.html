@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee ID</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main_header_section">
+        <div class="container">
+            <form class="employee-id-form" onsubmit="return redirectToDetails()">
+                <h2>Enter Employee ID</h2>
+                <div class="input-group">
+                    <label for="employeeId">Employee ID</label>
+                    <input type="text" id="employeeId" name="employeeId" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function redirectToDetails() {
+            const employeeId = document.getElementById('employeeId').value;
+
+            // Redirect to employee details page with the ID as a query parameter
+            window.location.href = "employee_details.html?employeeId=" + employeeId;
+            return false;
+        }
+    </script>
+</body>
+</html>

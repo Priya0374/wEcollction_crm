@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #c6d0db;
+    color: #333;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #43baf9;
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+.header nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.dashboard {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 257px;
+}
+
+.sidebar h2 {
+    margin-bottom: 10px;
+    color: #0044cc;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px 0;
+    font-weight: 600;
+}
+
+.content {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.summary-cards, .tasks-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+   
+}
+
+.card, .task-card {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h3, .task-card h3 {
+    color: #333;
+}
+
+.value {
+    font-size: 24px;
+    color: #0044cc;
+}
+
+.change {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.positive {
+    color: #4CAF50;
+}
+
+.negative {
+    color: #F44336;
+}
+
+.details-section, .chart-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.employee-info p {
+    margin-bottom: 5px;
+}
+
+.chart-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .summary-cards, .tasks-cards {
+        flex-direction: column;
+    }
+}
+
+
+.chart-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.target-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.target-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.target-card .amount {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.increase {
+    color: #4caf50;
+    font-size: 14px;
+}
+
+.decrease {
+    color: #e53935;
+    font-size: 14px;
+}
+
+/* General Card Styling */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    width: 200px;
+    margin: 10px;
+    font-family: Arial, sans-serif;
+}
+
+/* Card Title */
+.card-title {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 8px;
+    text-align: start;
+}
+
+/* Card Content Layout */
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Main Value Styling */
+.main-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.main-value .indicator {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.main-value .percent {
+    font-size: 16px;
+    color: #888;
+    margin-left: 2px;
+}
+
+/* Positive and Negative Indicators */
+.indicator.positive {
+    color: #4CAF50; /* Green */
+}
+
+.indicator.negative {
+    color: #F44336; /* Red */
+}
+
+/* Small Circle Styling */
+.small-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Adjust Circle Color for Each Card */
+.card:nth-child(1) .small-circle {
+    background-color: #4CAF50; /* Green for New Accounts */
+}
+
+.card:nth-child(2) .small-circle {
+    background-color: #F44336; /* Red for Total Expenses */
+}
+
+.card:nth-child(3) .small-circle {
+    background-color: #FFA000; /* Orange for Company Value */
+}
+
+
+/* Section Styling */
+.details-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* Employee Details Container */
+.employee-details {
+    background-color: #fff;
+    border-radius: 8px;
+  
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Title Styling */
+.employee-details h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid #0044cc;
+    padding-bottom: 10px;
+}
+
+/* Employee Table Styling */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.employee-table thead {
+    background-color: #0044cc;
+    color: #fff;
+}
+
+.employee-table th,
+.employee-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.employee-table tbody tr:nth-child(even) {
+    background-color: #f4f6f8;
+}
+
+.employee-table tbody tr:hover {
+    background-color: #e9eff5;
+}
+
+/* Additional Styling for Data */
+.employee-table td {
+    font-weight: 500;
+}
+
+.employee-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .employee-table th, .employee-table td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+
+#pending-tasks-value {
+    font-size: 25px;
+    margin: 10px;
+    color: orange;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#completed-tasks-value {
+    font-size: 25px;
+    margin: 10px;
+    color: green;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+    

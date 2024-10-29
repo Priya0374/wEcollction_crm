@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            const credential = response.credential;
+            console.log("Encoded JWT ID token: " + credential);
+            // Here, you can send the credential to your server for verification
+            window.location.href = "employee_id.html"; // Redirect on success
+        }
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check hard-coded credentials (for demonstration purposes)
+            if (username === "user123" && password === "pass123") {
+                // Redirect to the employee ID page if login is successful
+                window.location.href = "employee_id.html";
+                return false;
+            } else {
+                alert("Invalid username or password");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="main_header_section">
+        <div class="container">
+            <form class="login-form" onsubmit="return validateLogin()">
+                <h2>Login</h2>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="g_id_onload"
+                 data-client_id="YOUR_CLIENT_ID"
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+        </div>
+    </div>
+</body>
+</html>

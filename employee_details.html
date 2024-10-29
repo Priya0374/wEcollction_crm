@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Wecollect</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h2>Collection</h2>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Employees</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <section class="summary-cards">
+                <div class="card">
+                    <h4 class="card-title">Income</h4>
+                    <div class="card-content">
+                        <div class="main-value">
+                            <span class="indicator positive">▲</span>
+                            <span class="value">234</span>
+                            <span class="percent">%</span>
+                        </div>
+                        <div class="small-circle">
+                            <span>58</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4 class="card-title">Expenses</h4>
+                    <div class="card-content">
+                        <div class="main-value">
+                            <span class="indicator positive">▲</span>
+                            <span class="value">234</span>
+                            <span class="percent">%</span>
+                        </div>
+                        <div class="small-circle">
+                            <span>58</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4 class="card-title">Spendings</h4>
+                    <div class="card-content">
+                        <div class="main-value">
+                            <span class="indicator positive">▲</span>
+                            <span class="value">234</span>
+                            <span class="percent">%</span>
+                        </div>
+                        <div class="small-circle">
+                            <span>58</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h4 class="card-title">Totals</h4>
+                    <div class="card-content">
+                        <div class="main-value">
+                            <span class="indicator positive">▲</span>
+                            <span class="value">234</span>
+                            <span class="percent">%</span>
+                        </div>
+                        <div class="small-circle">
+                            <span>58</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tasks-cards">
+                <div class="task-card">
+                    <h3>Pending Tasks</h3>
+                    <p id="pending-tasks-value" class="task-value">5</p>
+                </div>
+                <div class="task-card">
+                    <h3>Completed Tasks</h3>
+                    <p id="completed-tasks-value" class="task-value">15</p>
+                </div>
+            </section>
+
+            <section class="details-section">
+                <div class="employee-details">
+                    <div id="employee-info" class="employee-info">
+                        <!-- Employee details table -->
+                        <table class="employee-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Department</th>
+                                    <th>Allocation</th>
+                                    <th>Collected Tasks</th>
+                                    <th>Pending Tasks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employee-table-body">
+                                <!-- Employee details will be populated here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </section>
+
+            <section class="chart-section">
+                <h2>Employees Details</h2>
+                <table class="employee-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Department</th>
+                            <th>Allocation</th>
+                            <th>Monthly Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="revenue-table-body">
+                        <!-- Revenue details will be populated here dynamically -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function getEmployeeDetails(employeeId) {
+            const employees = {
+                "E123": {
+                    name: "Alice Smith", 
+                    position: "Tele Caller", 
+                    department: "Collection",
+                    pendingTasks: 5,
+                    completedTasks: 15,
+                    allocation: "80%",
+                    monthlyRevenue: [5000, 7000, 8000, 5500, 7500, 9000, 6000, 6500, 7000, 8000, 9500, 11000]
+                },
+                "E124": {
+                    name: "Bob Johnson", 
+                    position: "Tele Caller", 
+                    department: "Management",
+                    pendingTasks: 3,
+                    completedTasks: 12,
+                    allocation: "60%",
+                    monthlyRevenue: [6000, 8000, 7000, 7500, 7200, 9000, 6500, 7100, 8000, 9000, 9500, 10500]
+                }
+                // Additional employees can be added here
+            };
+
+            const employee = employees[employeeId];
+            if (employee) {
+                // Update the main employee details table dynamically
+                const tableBody = document.getElementById("employee-table-body");
+                tableBody.innerHTML = `
+                    <tr>
+                        <td>${employee.name}</td>
+                        <td>${employee.position}</td>
+                        <td>${employee.department}</td>
+                        <td>${employee.allocation}</td>
+                        <td>${employee.completedTasks}</td>
+                        <td>${employee.pendingTasks}</td>
+                    </tr>
+                `;
+
+                // Update the Revenue Overview section
+                const revenueTableBody = document.getElementById("revenue-table-body");
+                revenueTableBody.innerHTML = `
+                    <tr>
+                        <td>${employee.name}</td>
+                        <td>${employee.position}</td>
+                        <td>${employee.department}</td>
+                        <td>${employee.allocation}</td>
+                        <td>${employee.monthlyRevenue.reduce((a, b) => a + b, 0)}</td> <!-- Total Monthly Revenue -->
+                    </tr>
+                `;
+
+                document.getElementById("employee-info").innerHTML = `<h2>Revenue Overview</h2>`;
+                document.getElementById("pending-tasks-value").textContent = employee.pendingTasks;
+                document.getElementById("completed-tasks-value").textContent = employee.completedTasks;
+
+                renderRevenueChart(employee.monthlyRevenue);
+            } else {
+                document.getElementById("employee-info").innerHTML = `<p>Employee not found.</p>`;
+            }
+        }
+
+        function renderRevenueChart(monthlyRevenue) {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: 'Monthly Revenue ($)',
+                        data: monthlyRevenue,
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const employeeId = urlParams.get("employeeId");
+        if (employeeId) {
+            getEmployeeDetails(employeeId);
+        }
+    </script>
+</body>
+</html>
